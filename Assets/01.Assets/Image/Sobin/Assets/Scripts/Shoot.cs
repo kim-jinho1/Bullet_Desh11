@@ -18,6 +18,7 @@ public class Shoot : MonoBehaviour
         {
             GetTransform();
             GetMousePosition();
+            transform.rotation = Quaternion.Euler(GetDir(_currentPosition, _mousePosition));
         }
         if(Input.GetMouseButtonUp(0))
         {
