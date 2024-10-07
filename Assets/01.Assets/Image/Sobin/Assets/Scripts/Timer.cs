@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         _time = 0;
-        _timer.text = "";
+      
     }
 
     private void Update()

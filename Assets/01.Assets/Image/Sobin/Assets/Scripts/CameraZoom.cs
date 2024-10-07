@@ -11,7 +11,7 @@ public class CameraZoom : MonoBehaviour
     private CinemachineVirtualCamera cam;
     private float Orisize;
     [SerializeField] float speed;
-    private float camSize = 5.5f;
+    private float camSize = 6f;
     private float time =0.5f;
     private bool IsZoom = false;
     private Shoot shoot;
