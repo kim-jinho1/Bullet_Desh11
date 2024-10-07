@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class Shoot : MonoBehaviour
 {
@@ -11,6 +8,11 @@ public class Shoot : MonoBehaviour
     [SerializeField] private float Power = 1;
     [SerializeField] private GameObject DotLine;
     private bool isGround;
+    [SerializeField] CountText countText;
+    private void OnEnable()
+    {
+      
+    }
     public bool IsGround
     {
         get
@@ -30,7 +32,7 @@ public class Shoot : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
             GetTransform();
             GetMousePosition();
@@ -38,11 +40,14 @@ public class Shoot : MonoBehaviour
             DotLine.SetActive(true);
             rotation();
         }
-        if(Input.GetMouseButtonUp(0)&&IsGround)
+        if (Input.GetMouseButtonUp(0) && IsGround)
         {
-             Vector2 dir = GetDir(_currentPosition, _mousePosition);
-            rigid.AddForce(dir*Power, ForceMode2D.Impulse);
+
+            countText.AddCount();
             DotLine.SetActive(false);
+            Vector2 dir = GetDir(_currentPosition, _mousePosition);
+            rigid.AddForce(dir * Power, ForceMode2D.Impulse);
+
         }
     }
 
@@ -54,29 +59,29 @@ public class Shoot : MonoBehaviour
 
     private void GetMousePosition()
     {
-         _mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-        
+        _mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
     }
-    private Vector2 GetDir(Vector2 current,Vector2 dir)
+    private Vector2 GetDir(Vector2 current, Vector2 dir)
     {
-        Vector2 ShootDir= new Vector2((dir.x-current.x),(dir.y-current.y));
+        Vector2 ShootDir = new Vector2((dir.x - current.x), (dir.y - current.y));
         return ShootDir;
     }
 
     private void ChangeColor(bool isGround)
     {
         SpriteRenderer sprite = DotLine.GetComponent<SpriteRenderer>();
-        if(!isGround)
+        if (!isGround)
         {
-          sprite.color = Color.red;
+            sprite.color = Color.red;
         }
         else
         {
             sprite.color = Color.white;
         }
-       
+
     }
-    
+
     private void rotation()
     {
         Vector3 direction = _mousePosition - _currentPosition;
