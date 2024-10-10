@@ -9,12 +9,13 @@ public class GasBoom : MonoBehaviour
     [SerializeField] GameObject _boom;
     SpriteRenderer SpriteRenderer;
 
+
     private void Start()
     {
         SpriteRenderer= _boom.GetComponent<SpriteRenderer>();
     }
 
-    IEnumerator staredBoom()
+    IEnumerator StaredBoom()
     {
         SpriteRenderer.DOColor(Color.red, 2f);
         yield return new WaitForSeconds(2f);
@@ -27,8 +28,9 @@ public class GasBoom : MonoBehaviour
       
         if (collision.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(staredBoom());
+            StartCoroutine(StaredBoom());
         }
     }
+
 
 }
